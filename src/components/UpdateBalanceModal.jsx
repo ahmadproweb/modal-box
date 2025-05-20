@@ -1,5 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
 import React, { Fragment, useState } from "react";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 
 const formatCurrency = (value) => {
   return new Intl.NumberFormat("en-NG", {
@@ -34,7 +35,7 @@ export default function UpdateBalanceModal({
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog
         as="div"
-        className="relative z-10"
+        className="relative z-50"
         onClose={() => setIsOpen(false)}
       >
         <Transition.Child
@@ -46,7 +47,10 @@ export default function UpdateBalanceModal({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black bg-opacity-25" />
+          <div
+            className="fixed inset-0"
+            style={{ backgroundColor: "#898989" }}
+          />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto">
@@ -60,29 +64,39 @@ export default function UpdateBalanceModal({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="w-full max-w-sm transform overflow-hidden rounded-md bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <div className="absolute top-4 right-4">
+                  <button onClick={() => setIsOpen(false)}>
+                    <XMarkIcon className="w-7 h-7 text-white cursor-pointer" />
+                  </button>
+                </div>
+
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900"
+                  className="text-lg font-semibold text-center text-gray-800"
                 >
-                  Update Bank Balance
+                  Update Bank balance
                 </Dialog.Title>
 
-                <div className="mt-4 space-y-4">
+                <p className="mt-1 text-sm text-center text-gray-500">
+                  Update the balance for First Bank.
+                </p>
+
+                <div className="mt-6 space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="text-sm font-medium text-gray-700">
                       Current Balance
                     </label>
                     <input
                       type="text"
                       value={formatCurrency(currentBalance)}
                       disabled
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 cursor-not-allowed"
+                      className="mt-1 w-full rounded border border-gray-300 bg-gray-100 px-3 py-2 text-gray-600"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="text-sm font-medium text-gray-700">
                       New Balance (NGN)
                     </label>
                     <input
@@ -90,23 +104,23 @@ export default function UpdateBalanceModal({
                       value={newBalance}
                       onChange={handleInputChange}
                       placeholder="₦0"
-                      className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                      className="mt-1 w-full rounded border border-gray-300 px-3 py-2 text-gray-800 focus:border-yellow-500 focus:ring-yellow-500"
                     />
                   </div>
                 </div>
 
-                <div className="mt-6 flex justify-end gap-2">
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className="border border-gray-300 px-4 py-2 rounded-md text-gray-700 cursor-pointer"
-                  >
-                    Cancel
-                  </button>
+                <div className="mt-6 space-y-2">
                   <button
                     onClick={handleUpdate}
-                    className="bg-blue-600 text-white px-4 py-2 rounded-md cursor-pointer"
+                    className="w-full rounded bg-yellow-400 px-4 py-2 font-medium text-white hover:bg-yellow-500"
                   >
                     Update Balance
+                  </button>
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="w-full rounded border border-gray-300 px-4 py-2 font-medium text-gray-700 hover:bg-gray-50"
+                  >
+                    Cancel
                   </button>
                 </div>
               </Dialog.Panel>

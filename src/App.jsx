@@ -10,7 +10,7 @@ function App() {
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <button
         onClick={() => setIsOpen(true)}
-        className="bg-blue-600 text-white px-4 py-2 rounded-md cursor-pointer"
+        className="bg-yellow-500 text-white px-4 py-2 rounded-md cursor-pointer"
       >
         Open Modal
       </button>
